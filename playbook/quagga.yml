@@ -1,0 +1,92 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Ставим пакет quagga
+    yum:
+      name: quagga
+      state: latest
+
+  - name: копируем наших демонов для quagga
+    copy:
+      src: daemons
+      dest: /etc/quagga/daemons
+      owner: quagga
+      group: quagga
+      mode: 0640
+
+  - name: Копируем конфиг зебры для server1
+    copy: 
+      src: server1/zebra.conf
+      dest: /etc/quagga/zebra.conf
+      owner: quagga
+      group: quagga
+      mode: 0640
+    notify: zebra restart
+    when: ansible_facts['hostname'] == "server1"
+
+  - name: Копируем конфиг зебры для server2
+    copy: 
+      src: server2/zebra.conf 
+      dest: /etc/quagga/zebra.conf 
+      owner: quagga 
+      group: quagga 
+      mode: 0640
+    notify: zebra restart
+    when: ansible_facts['hostname'] == "server2"
+
+  - name: Копируем конфиг зебры для server3
+    copy: 
+      src: server3/zebra.conf 
+      dest: /etc/quagga/zebra.conf 
+      owner: quagga 
+      group: quagga 
+      mode: 0640
+    notify: zebra restart
+    when: ansible_facts['hostname'] == "server3"
+
+  - name: Копируем конфиг ospfd для server1
+    copy: 
+      src: server1/ospfd.conf
+      dest: /etc/quagga/ospfd.conf
+      owner: quagga
+      group: quagga
+      mode: 0640
+    notify: ospfd restart
+    when: ansible_facts['hostname'] == "server1"
+
+  - name: Копируем конфиг ospfd для  server2
+    copy: 
+      src: server2/ospfd.conf 
+      dest: /etc/quagga/ospfd.conf 
+      owner: quagga 
+      group: quagga 
+      mode: 0640
+    notify: ospfd restart
+    when: ansible_facts['hostname'] == "server2"
+
+  - name: Копируем конфиг ospfd для server3
+    copy: 
+      src: server3/ospfd.conf 
+      dest: /etc/quagga/ospfd.conf 
+      owner: quagga 
+      group: quagga 
+      mode: 0640
+    notify: ospfd restart
+    when: ansible_facts['hostname'] == "server3"   
+    
+  handlers:
+  - name: zebra restart
+    systemd:
+      name: zebra
+      state: restarted
+      enabled: yes
+
+  - name: ospfd restart
+    systemd:
+      name: ospfd
+      state: restarted
+      enabled: yes
+      
