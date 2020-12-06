@@ -14,7 +14,7 @@ Vagrantfile + ansible
       $ vagrant up
 Результатом будет 3 сервера с настроенным ассиметричным роутингом
 
-[картинка 0]
+![Иллюстрация к проекту](https://github.com/RaibeartRuadh/myospf/blob/main/diagram.png?raw=true)
 
 Залогинимся на сервере 1
         
@@ -26,12 +26,12 @@ Vagrantfile + ansible
       $ ip r
       $ tracepath tracepath 10.30.0.1
 
-[картинка 1]
+![Иллюстрация к проекту](https://github.com/RaibeartRuadh/myospf/blob/main/pic1.png?raw=true)
 
 Повтоярем аналогичные действия на server2
 Наш роутинг ассиметричный.
 
-[картинка 2]
+![Иллюстрация к проекту](https://github.com/RaibeartRuadh/myospf/blob/main/pic2.png?raw=true)
 
 Чтобы сделать роутинг симметричным, а один из линков "дорогим", на нужно поменять стоимость интерфейсов
 Переходим на server2 и, используя консоль "зебры", вносим изменения:
@@ -42,7 +42,7 @@ Vagrantfile + ansible
 
 Видим, что линк стал дорогим и симметричным.
 
-[картинка]
+![Иллюстрация к проекту](https://github.com/RaibeartRuadh/myospf/blob/main/pic3.png?raw=true)
 
 
 Материалы:
