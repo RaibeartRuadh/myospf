@@ -4,6 +4,36 @@
   become: true
   tasks:
 
+#  - name: disable selinux
+#    selinux: 
+#      state: disabled
+#    notify:
+#      - system restart
+  
+  - name: Устанавливаем epel-репозиторий
+    yum:
+      name: epel-release
+      state: present
+    tags:
+      - epel-package
+      - packages
+
+  - name: Устанавливаем необходимые и вспомогательные пакеты через yum
+    yum:
+      name: "{{item}}"
+      state: present
+    loop:
+      - mc
+      - nano
+      - net-tools
+      - yum-utils
+      - bind-utils
+      - tcpdump
+      - traceroute        
+      - net-tools
+      - iotop
+      - elinks
+
   - name: Ставим пакет quagga
     yum:
       name: quagga
@@ -78,6 +108,10 @@
     when: ansible_facts['hostname'] == "server3"   
     
   handlers:
+  #- name: system restart
+  #  reboot: 
+  #      reboot_timeout: 100 
+  
   - name: zebra restart
     systemd:
       name: zebra
