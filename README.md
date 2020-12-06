@@ -34,15 +34,14 @@ Vagrantfile + ansible
 ![Иллюстрация к проекту](https://github.com/RaibeartRuadh/myospf/blob/main/pic2.png?raw=true)
 
 Чтобы сделать роутинг симметричным, а один из линков "дорогим", на нужно поменять стоимость интерфейсов
-Переходим на server2 и, используя консоль "зебры", вносим изменения:
+Переходим на server2 и, используя консоль "зебры", вносим изменения
+
+![Иллюстрация к проекту](https://github.com/RaibeartRuadh/myospf/blob/main/pic3.png?raw=true)
 
 Проверяем на server2 маршрут до 10.30.0.1
 
       $ tracepath tracepath 10.30.0.1
-
 Видим, что линк стал дорогим и симметричным.
-
-![Иллюстрация к проекту](https://github.com/RaibeartRuadh/myospf/blob/main/pic3.png?raw=true)
 
 
 Материалы:
